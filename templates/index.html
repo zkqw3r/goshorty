@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoShorty</title>
+    <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 GoShorty</h1>
+    <div id="error" class="error-message">
+        <p id="errorText">Error!</p>
+    </div>
+    <form id="shortenForm">
+        <input type="text" name="url" id="urlInput" placeholder="Insert a long link..." required autocomplete="off">
+        <button type="submit">Shorten</button>
+    </form>
+    <div id="result" class="result">
+        <p>Your link</p>
+        <a id="shortLink" href="#" target="_blank">...</a>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('shortenForm');
+    const resultDiv = document.getElementById('result');
+    const errorDiv = document.getElementById('error');
+    const errorText = document.getElementById('errorText');
+    const link = document.getElementById('shortLink');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        errorDiv.style.display = 'none';
+        resultDiv.style.display = 'none';
+
+        const url = document.getElementById('urlInput').value;
+        const formData = new FormData();
+        formData.append('url', url);
+
+        try {
+            const response = await fetch('/shorten', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                link.href = data.short_url;
+                link.textContent = data.short_url;
+                resultDiv.style.display = 'block';
+            } else {
+                try {
+                    const errorData = await response.json();
+                    if (errorData.error) {
+                        showError(errorData.error);
+                    } else {
+                        showError("Unknown error");
+                    }
+                } catch (jsonError) {
+                    const text = await response.text();
+                    showError(text || "Connection error");
+                }
+            }
+        } catch (networkError) {
+            console.error(networkError);
+            showError("Unable to connect to the server");
+        }
+    });
+
+    function showError(message) {
+        errorText.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        
+        if (params.get('error') === 'notfound') {
+            showError("Bro, such a link does not exist");
+            window.history.replaceState({}, document.title, "/");
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Varela&display=swap');
+
+body {
+    background-image: url("/static/images/bg9.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000; 
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    overflow: hidden;
+}
+
+.container {
+    font-family: "Varela", sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    padding: 35px;
+    background: rgba(35, 35, 35, 0.2); 
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    animation: float 6s ease-in-out infinite;
+    z-index: 10;
+}
+
+body::after {
+    background: #03dac6;
+    bottom: -50px;
+    right: -50px;
+    animation: moveBlob2 10s infinite alternate;
+}
+
+h1 {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+    margin-top: 15px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    font-size: 60px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: #bb86fc;
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+}
+
+input::placeholder {
+    color: #cacaca;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: linear-gradient(45deg, #bb86fc, #9a47ff);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(154, 71, 255, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 219, 247, 0.6);
+}
+
+.result {
+    padding: 25px;
+    width: 68%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    display: none;
+}
+
+.result p {
+    margin-top: -10px;
+    font-size: 2rem;
+}
+
+a {
+    color: #fff;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.error-message {
+    margin-bottom: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 8px;
+    color: #ff4232;
+    font-size: 2rem;
+    display: none;
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
