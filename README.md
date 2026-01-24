@@ -107,5 +107,3 @@ go run ./app
 <div align="center">
   <sub>Made with ❤️ by <b>zkqw3r</b></sub>
 </div>
-# goshorty
-# goshorty
